@@ -1,0 +1,38 @@
+version: 2
+
+project_name: jenkins-cli
+
+env:
+  - GO111MODULE=on
+
+archives:
+  - format: binary
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+dist: dist
+
+before:
+  hooks:
+    - go mod download
+    - go mod verify
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    dir: .
+    main: cmd/main.go
+    binary: jenkins-cli
+    flags:
+      - -trimpath
