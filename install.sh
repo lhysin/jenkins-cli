@@ -28,9 +28,10 @@ get_latest_version() {
 OS=$(detect_os)
 ARCH=$(detect_arch)
 VERSION=${VERSION:-$(get_latest_version)}
+VERSION_NO_V=$(echo "$VERSION" | sed 's/^v//')
 EXT=""
 [ "$OS" = "windows" ] && EXT=".exe"
-BINARY="jenkins-cli_${VERSION}_${OS}_${ARCH}${EXT}"
+BINARY="jenkins-cli_${VERSION_NO_V}_${OS}_${ARCH}${EXT}"
 DEST="${DEST:-/usr/local/bin/jenkins-cli${EXT}}"
 
 echo "Detected: $OS/$ARCH"
