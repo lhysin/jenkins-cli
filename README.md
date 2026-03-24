@@ -23,8 +23,22 @@
 
 ### Quick Install (macOS/Linux)
 
+#### Option 1: System-wide (requires sudo)
+
 ```bash
-curl -fsSL https://raw.githubusercontent.com/lhysin/jenkins-cli/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/lhysin/jenkins-cli/main/install.sh | sudo sh
+```
+
+#### Option 2: User directory (no sudo required)
+
+```bash
+mkdir -p ~/.local/bin
+curl -fsSL https://raw.githubusercontent.com/lhysin/jenkins-cli/main/install.sh | DEST=~/.local/bin/jenkins-cli sh
+```
+
+Add to your shell profile (`.zshrc`, `.bashrc`, etc.):
+```bash
+export PATH="$HOME/.local/bin:$PATH"
 ```
 
 ### Uninstall
@@ -46,12 +60,14 @@ Download from [GitHub Releases](https://github.com/lhysin/jenkins-cli/releases)
 | Windows | x86_64 | `jenkins-cli_windows_amd64.exe` |
 
 ```bash
-# macOS/Linux (install.sh 사용)
-curl -fsSL https://raw.githubusercontent.com/lhysin/jenkins-cli/main/install.sh | sh
-
-# 또는 직접 다운로드
+# System-wide (with sudo)
 curl -fsSL https://github.com/lhysin/jenkins-cli/releases/latest/download/jenkins-cli_darwin_arm64 -o /usr/local/bin/jenkins-cli
 chmod +x /usr/local/bin/jenkins-cli
+
+# User directory (no sudo)
+mkdir -p ~/.local/bin
+curl -fsSL https://github.com/lhysin/jenkins-cli/releases/latest/download/jenkins-cli_darwin_arm64 -o ~/.local/bin/jenkins-cli
+chmod +x ~/.local/bin/jenkins-cli
 ```
 
 ### Build from Source
